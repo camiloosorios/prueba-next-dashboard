@@ -11,7 +11,7 @@ export default function SignInButton() {
                 alt='Google Icon'
                 width={20}
                 height={20}
-                className='inline-block w-auto'
+                className='inline-block'
             />
             <span className='mx-3 text-gray-800 font-semibold'>Iniciar sesión con Google</span>
         </button>

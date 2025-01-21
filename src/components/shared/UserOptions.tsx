@@ -34,7 +34,7 @@ export function UserOptions({ user }: UserOptionsProps) {
                         alt={user?.name || 'User'}
                         width={30}
                         height={30}
-                        className='rounded-full cursor-pointer border-2 border-gray-200 dark: border-secondary w-auto'
+                        className='rounded-full cursor-pointer border-2 border-gray-200 dark: border-secondary'
                     />
                 </Button>
             </PopoverTrigger>
@@ -46,7 +46,7 @@ export function UserOptions({ user }: UserOptionsProps) {
                             alt={user?.name || 'User'}
                             width={40}
                             height={15}
-                            className='rounded-full w-auto'
+                            className='rounded-full'
                         />
                     </div>
                     <div className='space-y-0'>

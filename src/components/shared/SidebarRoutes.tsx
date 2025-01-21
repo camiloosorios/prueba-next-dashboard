@@ -47,7 +47,6 @@ export default function SidebarRoutes() {
                         alt='Logo App'
                         width={50}
                         height={50}
-                        className='w-auto'
                     />
                     <span className='text-2xl'>NextDashboard</span>
                 </div>
