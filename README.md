@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Proyecto: **NextDashboard**
 
-## Getting Started
+Este proyecto es una aplicación web de **Dashboard** construida con **Next.js**. Cuenta con autenticación por medio de OAuth, interacción con una api de prueba y dashboard con tablas y gráficas.
 
-First, run the development server:
+`Objetivo:` En este documento, te proporcionaré las instrucciones necesarias para configurar el proyecto en tu entorno local y cómo ponerlo en funcionamiento utilizando Docker.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Requisitos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Para ejecutar el proyecto correctamente, necesitarás las siguientes herramientas:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Node.js**: Necesitarás tener **Node.js 18 o superior** instalado en tu máquina. Puedes verificar si tienes Node.js instalado con el siguiente comando:
+  
+  ```bash
+  node -v
+  ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Docker**: Asegúrate de tener **Docker** instalado y funcionando en tu sistema. Puedes verificar esto con el siguiente comando:
 
-## Learn More
+    ```bash
+    docker --version
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+- **Docker Compose**: Este proyecto utiliza Docker Compose para gestionar múltiples contenedores. Asegúrate de que Docker Compose también esté instalado. Verifica con:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    docker-compose --version
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Pasos para configurar el proyecto
 
-## Deploy on Vercel
+1. ### Clonar el repositorio:
+    Primero, clona el repositorio a tu máquina local:
+    ```bash
+    git clone https://github.com/tu-usuario/tu-repositorio.git
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    cd tu-repositorio
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. ### Configurar las variables de entorno:
+    Este proyecto utiliza variables de entorno para almacenar credenciales y configuraciones sensibles. Para facilitar su configuración, sigue los siguientes pasos:
+    
+    - Renombra el archivo `.env.example` que se encuentra en la raíz del proyecto a `.env` y configura las variables de entorno con sus valores.
+
+    ```bash
+    GOOGLE_CLIENT_ID=your-google-client-id
+    GOOGLE_CLIENT_SECRET=your-google-client-secret
+    NEXTAUTH_SECRET=your-nextauth-secret
+    ```
+
+3. ### Ejecutar la aplicación con Docker y Docker compose
+    - **Construir la imagen y levantar el contenedor:** Para construir  y levantar la imagen de Docker, utiliza el siguiente comando:
+
+    ```bash
+    docker compose up --build
+    ```
+
+    - Acceder a la aplicación: La aplicación estará disponible en http://localhost:3000. Abre tu navegador y navega a esta URL para ver el proyecto en funcionamiento.
+
+## Comandos útiles
+- Detener los contenedores
+    ```bash
+    docker-compose down
+    ```
+
+- Reconstruir sin cache
+    ```bash
+    docker-compose build --no-cache
+    ```
+
+## Notas finales
+
+Con esta guía, se tiene todo lo necesario para ejecutar el proyecto en un entorno local. El objetivo principal de este proyecto es demostrar la integración de tecnologías como Next.js, autenticación OAuth, y despliegue mediante Docker, ofreciendo una base sólida para evaluaciones técnicas y posibles extensiones.
+
+Si existe algún problema durante la configuración, asegúrate de verificar los requisitos y los pasos descritos. Este proyecto busca ser un ejemplo funcional y práctico, adaptable a diversos ambientes de desarrollo.
