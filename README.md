@@ -31,9 +31,9 @@ Para ejecutar el proyecto correctamente, necesitarás las siguientes herramienta
 1. ### Clonar el repositorio:
     Primero, clona el repositorio a tu máquina local:
     ```bash
-    git clone https://github.com/tu-usuario/tu-repositorio.git
+    git clone https://github.com/camiloosorios/prueba-next-dashboard.git
 
-    cd tu-repositorio
+    cd prueba-next-dashboard
     ```
 
 2. ### Configurar las variables de entorno:
