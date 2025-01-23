@@ -205,7 +205,7 @@ export default function ProductsTable() {
 
     return (
         <div className='w-full'>
-            <div className='flex items-center py-4'>
+            <div className='flex flex-col-reverse md:flex-row items-center py-4'>
                 <Input
                     placeholder='Filter by title...'
                     value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
@@ -214,7 +214,7 @@ export default function ProductsTable() {
                     }
                     className='max-w-sm'
                 />
-                <div className='flex justify-end w-full px-5'>
+                <div className='flex justify-end w-full my-2 xl:my-0 md:px-5'>
                     <CreateProductsModal />
                 </div>
                 <DropdownMenu>

@@ -38,7 +38,7 @@ export default function DashboardPage() {
         <CategoriesDistribution />
       </div>
       <div className='flex flex-col xl:flex-row gap-y-4 md:gap-y-0 mt-12 md:mb-10 justify-center'>
-        <ListIntegration />
+        <ListIntegration/>
       </div>
     </div>
   )

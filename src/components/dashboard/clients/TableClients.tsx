@@ -31,39 +31,51 @@ import { ChevronUp } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-type TableIntegrationsProps = {
-  app: string,
-  icon: string,
-  type: 'Finance' | 'CRM' | 'Marketplace',
-  rate: number,
-  profit: number
+type TableClientsProps = {
+  name: string;
+  company: string;
+  email: string;
+  country: string;
+  volume: number;
+  icon: string;  // Imagen del cliente
 }
 
-const data: TableIntegrationsProps[] = [
+const data: TableClientsProps[] = [
   {
-    app: 'Stripe',
-    icon: '/images/stripe.webp',
-    type: 'Finance',
-    rate: 60,
-    profit: 450
+    name: 'John Doe',
+    company: 'Acme Inc.',
+    email: 'john.doe@acme.com',
+    country: 'USA',
+    volume: 150000,
+    icon: '/images/acme-logo.svg',
   },
   {
-    app: 'Zpier',
-    icon: '/images/zapier.svg',
-    type: 'CRM',
-    rate: 20,
-    profit: 123.5
+    name: 'Jane Smith',
+    company: 'Global Tech',
+    email: 'jane.smith@globaltech.com',
+    country: 'UK',
+    volume: 120000,
+    icon: '/images/global-logo.svg',
   },
   {
-    app: 'Shopify',
-    icon: '/images/shopify.svg',
-    type: 'Marketplace',
-    rate: 80,
-    profit: 879.89
+    name: 'Carlos García',
+    company: 'Desarrollo S.A.',
+    email: 'carlos.garcia@desarrollo.com',
+    country: 'Mexico',
+    volume: 100000,
+    icon: '/images/desarrollo-logo.svg',
+  },
+  {
+    name: 'Linda Parker',
+    company: 'Green Solutions',
+    email: 'linda.parker@greensolutions.com',
+    country: 'Canada',
+    volume: 80000,
+    icon: '/images/green-logo.svg',
   },
 ];
 
-export const columns: ColumnDef<TableIntegrationsProps>[] = [
+export const columns: ColumnDef<TableClientsProps>[] = [
   {
     accessorKey: 'icon',
     header: () => <div className='font-bold'>Logo</div>,
@@ -71,66 +83,57 @@ export const columns: ColumnDef<TableIntegrationsProps>[] = [
       <div className='capitalize'>
         <Image
           src={row.getValue('icon')}
-          alt='Logo'
-          width={20}
-          height={20}
+          alt='Client Logo'
+          width={30}
+          height={30}
         />
       </div>
     ),
   },
   {
-    accessorKey: 'app',
-    header: () => <div className='font-bold'>Application</div>,
-    cell: ({ row }) => (
-      <div className='capitalize'>{row.getValue('app')}</div>
-    ),
+    accessorKey: 'name',
+    header: () => <div className='font-bold'>Client</div>,
+    cell: ({ row }) => <div className='capitalize'>{row.getValue('name')}</div>,
   },
   {
-    accessorKey: 'type',
-    header: () => <div className='font-bold'>Type</div>,
-    cell: ({ row }) => <div className='capitalize'>{row.getValue('type')}</div>,
+    accessorKey: 'company',
+    header: () => <div className='font-bold'>Company</div>,
+    cell: ({ row }) => <div className='capitalize'>{row.getValue('company')}</div>,
   },
   {
-    accessorKey: 'rate',
-    header: () => <div className='font-bold'>Rate</div>,
-    cell: ({ row }) => (
-      <div className='font-medium flex gap-1 items-center'>
-        <Progress
-          value={row.getValue('rate')}
-          className='h-2'
-        />
-      </div>
-    ),
+    accessorKey: 'email',
+    header: () => <div className='font-bold'>Email</div>,
+    cell: ({ row }) => <div>{row.getValue('email')}</div>,
   },
   {
-    accessorKey: 'profit',
+    accessorKey: 'country',
+    header: () => <div className='font-bold'>Country</div>,
+    cell: ({ row }) => <div>{row.getValue('country')}</div>,
+  },
+  {
+    accessorKey: 'volume',
     header: ({ column }) => (
       <Button
         variant='ghost'
         className='float-end px-0 font-bold'
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
-        Profit
-        <ChevronUp className='ml-2 h-4 w-4' />
+        Volume
       </Button>
     ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('profit'));
+      const amount = parseFloat(row.getValue('volume'));
       return (
         <div className='font-medium text-end'>{formatPrice(amount)}</div>
-      )
+      );
     },
   },
-]
+];
 
-export default function TableIntegrations() {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = useState({})
+export default function TableClients() {
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
@@ -149,7 +152,8 @@ export default function TableIntegrations() {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
+
   return (
     <div className='w-full'>
       <div className='flex items-center py-4'>
@@ -170,7 +174,7 @@ export default function TableIntegrations() {
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                )
+                );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -180,44 +184,30 @@ export default function TableIntegrations() {
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    </TableHead>
-                  )
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
-                >
+                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className='h-24 text-center'
-                >
+                <TableCell colSpan={columns.length} className='h-24 text-center'>
                   No results.
                 </TableCell>
               </TableRow>
@@ -226,7 +216,5 @@ export default function TableIntegrations() {
         </Table>
       </div>
     </div>
-  )
+  );
 }
-
-

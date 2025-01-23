@@ -1,6 +1,6 @@
 import { List } from 'lucide-react'
 import CustomIcon from '../shared/CustomIcon'
-import TableIntegrations from './integrations/TableIntegrations'
+import TableClients from './clients/TableClients'
 
 export default function ListIntegration() {
     return (
@@ -9,9 +9,9 @@ export default function ListIntegration() {
                 <CustomIcon
                     icon={List}
                 />
-                <p className='text-xl font-bold'>List of Integrations</p>
+                <p className='text-xl font-bold'>List of Main Costumers</p>
             </div>
-            <TableIntegrations />
+            <TableClients/>
         </div>
     )
 }
